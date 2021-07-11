@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>iframe+postMessage跨域通信 子页面2</title>
+  <script src="./index.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="login">login</button>
+  <button id="loginOut">loginOut</button>
+  <button id="changePassword">changePassword</button>
+
+  <button id="refresh">refresh</button>
+
+  <h1 id="content"></h1>
+</body>
+
+<script>
+  // const initSsoClient = new SsoClient()
+  // 登录
+  document.getElementById("login").onclick = () => {
+    window.initSsoClient.postMiddleMessage("updata", {
+      type: "updata",
+      token: "hzd" + new Date().getTime(),
+      loginname: "hzd",
+      info: 'login'
+    })
+  }
+  /**
+   * @description: 退出登录
+   * @param {*} 比传参数: 1. type 2. token = "remove"
+   * @return {*}
+   */
+  document.getElementById("loginOut").onclick = () => {
+    window.initSsoClient.postMiddleMessage("updata", {
+      type: "updata",
+      token: "remove",
+      loginname: "hzd",
+      info: 'loginOut'
+    })
+  }
+  // 加密密码
+  document.getElementById("changePassword").onclick = () => {
+    window.initSsoClient.postMiddleMessage("updata", {
+      type: "updata",
+      password: "hzd" + new Date().getTime(),
+      loginname: "h z d",
+      info: 'password'
+    })
+  }
+  // refresh
+  document.getElementById("refresh").onclick = () => {
+    window.initSsoClient.postMiddleMessage("get")
+  }
+</script>
+
+</html>
